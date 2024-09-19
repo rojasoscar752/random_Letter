@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Random Letter Generator</title>
+    <script>
+        async function getRandomLetter() {
+            try {
+                const response = await fetch('http://localhost:8000/middleware');
+                const letra = await response.text();
+                document.getElementById('random-letter').innerText = `Random Letter: ${letra}`;
+            } catch (error) {
+                console.error('Error fetching random letter:', error);
+                document.getElementById('random-letter').innerText = 'Error fetching random letter.';
+            }
+        }
+    </script>
 </head>
 <body>
-    
+    <h1>Random Letter Generator</h1>
+    <button onclick="getRandomLetter()">Generate Letter</button>
+    <p id="random-letter">Click the button to get a random letter</p>
 </body>
 </html>
